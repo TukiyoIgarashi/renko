@@ -1,0 +1,29 @@
+service: renko
+
+plugins:
+  - serverless-webpack
+
+package:
+  exclude:
+    - secrets.yml
+
+custom:
+  webpackIncludeModules: true
+  secrets: ${file(./secrets.yml):${self:provider.stage}}
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+  stage: ${opt:stage, 'dev'}
+  region: us-east-1
+  environment:
+    stage: ${opt:stage, self:provider.stage}
+    MYSLACK_TOKEN: ${self:custom.secrets.MYSLACK_TOKEN}
+    OUKA_API_STAGE: ${self:custom.secrets.OUKA_API_STAGE}
+
+functions:
+  watchConventions:
+    handler: src/handler/furuyoniHandler.watchConventions
+    events:
+      - schedule: 
+          rate: rate(1 minute)
