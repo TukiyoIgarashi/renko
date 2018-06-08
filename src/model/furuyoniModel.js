@@ -11,7 +11,7 @@ class furuyoniModel {
                     }
                 })
                 .catch((err) => {
-                    this.notify(`get conventions error!!`)
+                    this.notify(`<@tukiyo> get conventions error!!`)
                 })
     }
 
