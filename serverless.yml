@@ -19,7 +19,7 @@ provider:
   environment:
     stage: ${opt:stage, self:provider.stage}
     MYSLACK_TOKEN: ${self:custom.secrets.MYSLACK_TOKEN}
-    OUKA_API_STAGE: ${self:custom.secrets.OUKA_API_STAGE}
+    OUKA_API_URL: ${self:custom.secrets.OUKA_API_URL}
 
 functions:
   watchConventions:
